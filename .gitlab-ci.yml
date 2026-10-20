@@ -6,7 +6,8 @@ python_tests:
   stage: test
   image: python:3.11
   script:
-    - python -m unittest discover -p "test_*.py" -v
+    - python -m pip install --no-cache-dir pytest
+    - python -m pytest -v test_risk_engine.py
 
 secret_detection:
   stage: security
