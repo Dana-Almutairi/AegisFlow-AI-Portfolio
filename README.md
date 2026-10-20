@@ -1,93 +1,78 @@
 # AegisFlow AI
 
+**Intelligent DevSecOps Automation Powered by GitLab Duo Agent Platform**
 
+## Overview
 
-## Getting started
+AegisFlow AI is an AI-powered DevSecOps automation project designed to help software teams review code changes, identify security risks, evaluate test results, and make safer release decisions.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The project is being developed for the **GitLab Transcend Hackathon 2026 — Life After Code**.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## The Problem
 
-## Add your files
+Software development does not end when code is written. Teams must still review changes, run tests, investigate security vulnerabilities, evaluate release risks, deploy applications, and respond to incidents.
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+These activities often involve repetitive manual work, disconnected tools, and delayed decisions.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43545252/aegisflow-ai.git
-git branch -M main
-git push -uf origin main
-```
+## Our Solution
 
-## Integrate with your tools
+AegisFlow AI aims to connect these activities through intelligent, coordinated workflows using GitLab Duo Agent Platform.
 
-* [Set up project integrations](https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43545252/aegisflow-ai/-/settings/integrations)
+The system is designed to:
 
-## Collaborate with your team
+- Review code changes and identify potential issues.
+- Analyze security findings and prioritize risks.
+- Evaluate automated test results.
+- Calculate release risk scores.
+- Recommend corrective actions.
+- Require human approval for sensitive release decisions.
+- Support deployment monitoring and incident response.
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+## Planned Architecture
 
-## Test and Deploy
+AegisFlow AI is organized around five functional components:
 
-Use the built-in continuous integration in GitLab.
+1. **Code Review Agent** — Reviews code changes and identifies potential quality issues.
+2. **Security Agent** — Analyzes security findings and recommends priorities.
+3. **Testing Agent** — Evaluates automated test results and suggests improvements.
+4. **Release Risk Engine** — Calculates risk scores and supports release decisions.
+5. **Deployment & Monitoring Agent** — Supports deployment verification and incident analysis.
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+These components are intended to work together through GitLab Duo Agent Platform workflows.
 
-***
+## Planned Workflow
 
-# Editing this README
+Code Change → AI Review → Security Analysis → Automated Testing → Release Risk Evaluation → Human Approval → Deployment → Monitoring
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## Technology Stack
 
-## Suggestions for a good README
+- GitLab
+- GitLab Duo Agent Platform
+- GitLab CI/CD
+- Python
+- Automated Testing
+- DevSecOps Practices
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## Development Status
 
-## Name
-Choose a self-explaining name for your project.
+**Status: Work in Progress**
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+The project is being implemented incrementally. Features described as planned are not yet claims of completed functionality.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## Project Goals
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- Reduce repetitive DevSecOps tasks.
+- Improve visibility into software release risks.
+- Support secure and reliable software delivery.
+- Keep humans in control of high-impact decisions.
+- Demonstrate practical AI-agent orchestration within GitLab.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## Hackathon
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+**Event:** GitLab Transcend Hackathon 2026  
+**Project:** AegisFlow AI  
+**Developer:** Dana Almutairi
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
