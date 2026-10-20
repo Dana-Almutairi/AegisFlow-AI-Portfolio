@@ -15,5 +15,6 @@ secret_detection:
   script:
     - python -m pip install --no-cache-dir detect-secrets
     
-    - detect-secrets scan --all-files --exclude-files '(^|/)\.git/' > .secrets.baseline
+        - detect-secrets scan --all-files --exclude-files '(^|/)\.git/' > .secrets.baseline
+    - python -c "import json,sys; d=json.load(open('.secrets.baseline')); n=sum(len(v) for v in d['results'].values()); print(f'Secrets detected: {n}'); sys.exit(1 if n else 0)"
 
