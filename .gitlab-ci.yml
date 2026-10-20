@@ -1,4 +1,3 @@
-
 stages:
   - test
   - security
@@ -14,7 +13,16 @@ secret_detection:
   image: python:3.11
   script:
     - python -m pip install --no-cache-dir detect-secrets
-    
-        - detect-secrets scan --all-files --exclude-files '(^|/)\.git/' > .secrets.baseline
-    - python -c "import json,sys; d=json.load(open('.secrets.baseline')); n=sum(len(v) for v in d['results'].values()); print(f'Secrets detected: {n}'); sys.exit(1 if n else 0)"
+    - detect-secrets scan --all-files --exclude-files '(^|/)\.git/' > .secrets.baseline
+    - |
+      python - <<'PY'
+      import json
+      import sys
 
+      with open(".secrets.baseline", encoding="utf-8") as file:
+          data = json.load(file)
+
+      count = sum(len(items) for items in data["results"].values())
+      print(f"Potential secrets detected: {count}")
+      sys.exit(1 if count else 0)
+      PY
