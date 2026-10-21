@@ -1,48 +1,121 @@
 # AegisFlow AI
 
-**Intelligent DevSecOps Automation Powered by GitLab Duo Agent Platform**
+**Risk-Aware, Human-Supervised DevSecOps Automation Powered by GitLab Duo Agent Platform**
 
 ## Overview
 
-AegisFlow AI is an AI-powered DevSecOps automation project designed to help software teams review code changes, identify security risks, evaluate test results, and make safer release decisions.
+AegisFlow AI is an AI-powered DevSecOps prototype that helps software teams assess security risks, review testing evidence, and make explainable software release decisions.
 
-The project is being developed for the **GitLab Transcend Hackathon 2026 — Life After Code**.
+Built for the **GitLab Transcend Hackathon 2026 — Life After Code**, AegisFlow AI explores how AI-driven workflows can support software delivery beyond code generation.
 
 ## The Problem
 
-Software development does not end when code is written. Teams must still review changes, run tests, investigate security vulnerabilities, evaluate release risks, deploy applications, and respond to incidents.
+Writing code is only one part of software development. Before releasing software, engineering teams must verify test results, investigate vulnerabilities, assess deployment risks, and decide whether a release is safe.
 
-These activities often involve repetitive manual work, disconnected tools, and delayed decisions.
+Incomplete evidence and disconnected workflows can make these decisions difficult.
 
 ## Our Solution
 
-AegisFlow AI aims to connect these activities through intelligent, coordinated workflows using GitLab Duo Agent Platform.
+AegisFlow AI combines a Python release risk engine, GitLab CI/CD checks, and a custom GitLab Duo Agent Platform workflow.
 
-The system is designed to:
+Its central principle is simple:
 
-- Review code changes and identify potential issues.
-- Analyze security findings and prioritize risks.
-- Evaluate automated test results.
-- Calculate release risk scores.
-- Recommend corrective actions.
-- Require human approval for sensitive release decisions.
-- Support deployment monitoring and incident response.
+**AI recommends. Humans remain in control.**
 
-## Planned Architecture
+## Implemented Features
 
-AegisFlow AI is organized around five functional components:
+### 1. Release Risk Engine
 
-1. **Code Review Agent** — Reviews code changes and identifies potential quality issues.
-2. **Security Agent** — Analyzes security findings and recommends priorities.
-3. **Testing Agent** — Evaluates automated test results and suggests improvements.
-4. **Release Risk Engine** — Calculates risk scores and supports release decisions.
-5. **Deployment & Monitoring Agent** — Supports deployment verification and incident analysis.
+The Python risk engine evaluates supplied release information and returns one of three decisions:
 
-These components are intended to work together through GitLab Duo Agent Platform workflows.
+- **APPROVED:** Required conditions satisfy the configured policy.
+- **REVIEW:** Coverage is below the required threshold.
+- **BLOCKED:** Tests fail or vulnerabilities are reported.
 
-## Planned Workflow
+The engine validates input types and ranges. Its current coverage threshold is 80%.
 
-Code Change → AI Review → Security Analysis → Automated Testing → Release Risk Evaluation → Human Approval → Deployment → Monitoring
+These decisions are based on supplied values; the engine does not independently collect CI/CD evidence.
+
+### 2. Automated Testing and CI/CD
+
+The repository includes:
+
+- Python unit tests using pytest.
+- A GitLab CI/CD testing stage.
+- Secret detection using detect-secrets.
+- A manual human-approval job.
+
+A previous pipeline confirmed nine passing tests.
+
+The current implementation does not automatically calculate test coverage or feed verified pipeline results into the release risk engine.
+
+### 3. Custom AI Agents
+
+Three custom agents have been configured in GitLab Duo Agent Platform:
+
+- **AegisFlow Security Agent**
+- **AegisFlow Testing Agent**
+- **AegisFlow Release Decision Agent**
+
+These agents represent the project's security, testing, and release-assessment responsibilities.
+
+### 4. AegisFlow Release Guardian Workflow
+
+A custom GitLab Duo Agent Platform Flow has been created and enabled.
+
+Its configured stages are:
+
+1. Security Analysis
+2. Testing Analysis
+3. Release Decision
+
+The workflow uses specialized prompts to assess repository evidence and produce a human-supervised release recommendation.
+
+The custom Flow uses its own configured agent components. Independent execution of the separately configured custom agents has not yet been verified.
+
+### 5. Verified Workflow Execution
+
+AegisFlow Release Guardian was triggered from GitLab Issue #1 using its service account.
+
+**Execution evidence:**
+
+- Session ID: `9819497`
+- Status: `Finished`
+- Final recommendation: `REVIEW REQUIRED`
+
+The generated report identified release-readiness gaps, including missing verified execution evidence, incomplete coverage measurement, and opportunities to strengthen CI/CD security.
+
+The report stated that no project files were modified and no deployment was performed.
+
+**Final recommendation: REVIEW REQUIRED**
+
+The workflow did not authorize a release. Human approval remains necessary before deployment.
+
+## Architecture
+
+```text
+GitLab Issue / Trigger
+         |
+         v
+AegisFlow Release Guardian
+         |
+         v
+Security Analysis
+         |
+         v
+Testing Analysis
+         |
+         v
+Release Decision
+         |
+         v
+APPROVED / REVIEW REQUIRED / BLOCKED
+         |
+         v
+Human Review
+```
+
+The AI workflow currently provides advisory recommendations rather than automated deployment authorization.
 
 ## Technology Stack
 
@@ -50,29 +123,38 @@ Code Change → AI Review → Security Analysis → Automated Testing → Releas
 - GitLab Duo Agent Platform
 - GitLab CI/CD
 - Python
-- Automated Testing
-- DevSecOps Practices
+- pytest
+- detect-secrets
+- YAML
+- DevSecOps practices
 
-## Development Status
+## Current Limitations
 
-**Status: Work in Progress**
+The prototype currently has several limitations:
 
-The project is being implemented incrementally. Features described as planned are not yet claims of completed functionality.
+- Release risk inputs are not automatically populated from verified CI/CD results.
+- Test coverage is not automatically measured.
+- Dependency scanning and comprehensive SAST are not yet integrated.
+- The manual approval job does not independently guarantee approval by a separate authorized reviewer.
+- Automated deployment and incident monitoring are not implemented.
+- The AI report requires validation against current repository and pipeline evidence.
 
-## Project Goals
+## Future Improvements
 
-- Reduce repetitive DevSecOps tasks.
-- Improve visibility into software release risks.
-- Support secure and reliable software delivery.
-- Keep humans in control of high-impact decisions.
-- Demonstrate practical AI-agent orchestration within GitLab.
+- Integrate verified pipeline results into release decisions.
+- Add measured test coverage and dependency vulnerability scanning.
+- Strengthen approval permissions and protected environments.
+- Extend support for code review and deployment monitoring.
+- Improve agent evaluation and evidence traceability.
 
 ## Hackathon
 
-**Event:** GitLab Transcend Hackathon 2026  
-**Project:** AegisFlow AI  
+**Event:** GitLab Transcend Hackathon 2026 — Life After Code
+
+**Project:** AegisFlow AI
+
 **Developer:** Dana Almutairi
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Licensed under the MIT License. See the LICENSE file for details.
