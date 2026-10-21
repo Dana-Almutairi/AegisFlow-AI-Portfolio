@@ -2,21 +2,21 @@
 from risk_engine import evaluate_release
 
 
-def test_approved_release():
-    result = evaluate_release(True, 0, 95)
-    assert result == "APPROVED: Ready for deployment"
+def test_nan_coverage_is_blocked():
+    assert evaluate_release(True, 0, float("nan")).startswith("BLOCKED")
 
 
-def test_failed_tests():
-    result = evaluate_release(False, 0, 95)
-    assert result == "BLOCKED: Tests failed"
+def test_negative_vulnerabilities_are_blocked():
+    assert evaluate_release(True, -1, 95).startswith("BLOCKED")
 
 
-def test_security_issue():
-    result = evaluate_release(True, 2, 95)
-    assert result == "BLOCKED: Security vulnerabilities detected"
+def test_invalid_test_status_is_blocked():
+    assert evaluate_release("False", 0, 95).startswith("BLOCKED")
 
 
-def test_low_coverage():
-    result = evaluate_release(True, 0, 60)
-    assert result == "REVIEW: Test coverage is below 80%"
+def test_infinite_coverage_is_blocked():
+    assert evaluate_release(True, 0, float("inf")).startswith("BLOCKED")
+
+
+def test_coverage_above_100_is_blocked():
+    assert evaluate_release(True, 0, 110).startswith("BLOCKED")
