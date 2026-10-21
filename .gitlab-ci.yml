@@ -1,6 +1,8 @@
+
 stages:
   - test
   - security
+  - approval
 
 python_tests:
   stage: test
@@ -27,3 +29,12 @@ secret_detection:
       print(f"Potential secrets detected: {count}")
       sys.exit(1 if count else 0)
       PY
+
+human_approval:
+  stage: approval
+  image: alpine:3.20
+  when: manual
+  allow_failure: false
+  script:
+    - echo "Human approval recorded for release review."
+    - echo "No deployment is performed by this job."
